@@ -1,0 +1,136 @@
+﻿@model Marik.Core.ViewModels.HomePageViewModel
+@section metatags{
+    <meta name="keywords" content="marketing, social media, email marketing, online marketing, advertising, public relations, Google Ads, Paid search, SEO,  business, development, Web and Graphic Design, UI / UX, Web & App Development, Branding, Photography, Content management, SPSS, market research, consumer behaviour, web design" />
+    <meta name="description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <link href="http://www.bymarik.com/" rel="canonical" />
+    <meta property="og:url" content="http://www.bymarik.com/" />
+    <meta property="og:title" content="Marik | Marketing and Business Development" />
+    <meta property="og:description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <meta property="og:image:alt" content="Marik | Marketing and Business Development" />
+    <meta property="og:type" content="website" />
+}
+@{
+    ViewBag.Title = "Marketing & Business Development";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="about container">
+    <div class="row">
+        <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+            <h2 class="title">@Html.Raw(Model.HomepageFirstSectionTitle)</h2>
+            <h4>@Html.Raw(Model.HomepageFirstSectionFirstParagraph)</h4>
+            <p>@Html.Raw(Model.HomepageFirstSectionSecondParagraph)</p>
+            <a href="@Url.Action("Index", "About")" class="button btn">more this way</a> <a href="@Url.Action("Index", "About")" class="about-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+        <div class="col-xl-6 pl-xl-5">
+            <div class="img-con">
+                <img src="@Model.HomepageFirstSectionImagePath/@Model.HomepageFirstSectionImageName" alt="About Marik">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="services container-fluid" id="services">
+    <h2>@Html.Raw(Model.HomepageServicesTitle)</h2>
+    <div class="row">
+        <div class="col-xl col-sm-6 service">
+            <a href="@Url.Action("BusinessDevelopment", "Services")"><img src="http://bymarik.com/@Model.HomepageService1ImagePath/@Model.HomepageService1ImageName" alt="Business Development"></a>
+            <a href="@Url.Action("BusinessDevelopment", "Services")" class="btn button">Business Development</a>
+        </div>
+        <div class="col-xl col-sm-6 service">
+            <a href="@Url.Action("Marketing", "Services")"><img src="http://bymarik.com/@Model.HomepageService2ImagePath/@Model.HomepageService2ImageName" alt="Marketing"></a>
+            <a href="@Url.Action("Marketing", "Services")" class="btn button">Marketing</a>
+        </div>
+        <div class="col-xl service">
+            <a href="@Url.Action("WebDesign", "Services")"><img src="http://bymarik.com/@Model.HomepageService3ImagePath/@Model.HomepageService3ImageName" alt="Web design"></a>
+            <a href="@Url.Action("WebDesign", "Services")" class="btn button">Web design</a>
+        </div>
+        <div class="col-xl col-sm-6 service">
+            <a href="@Url.Action("SPSS", "Services")"><img src="http://bymarik.com/@Model.HomepageService4ImagePath/@Model.HomepageService4ImageName" alt="SPSS"></a>
+            <a href="@Url.Action("SPSS", "Services")" class="btn button">Statistical Analysis</a>
+        </div>
+        <div class="col-xl col-sm-6 service">
+            <a href="@Url.Action("GraphicDesign", "Services")"><img src="http://bymarik.com/@Model.HomepageService5ImagePath/@Model.HomepageService5ImageName" alt="Graphic Design"></a>
+            <a href="@Url.Action("GraphicDesign", "Services")" class="btn button">Graphic Design</a>
+        </div>
+    </div>
+</section>
+
+<section class="reviews container-fluid py-5">
+    <div class="container position-relative">
+        <h2 class="title">client love</h2>
+        <p class="description">@Html.Raw(Model.HomepageReviewsText)</p>
+        <div class="owl-carousel reviews-carousel">
+            @foreach (var review in Model.Reviews)
+            {
+                <div class="review">
+                    <p>@review.Text</p>
+                    <h5>@review.ClientName</h5>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="about container">
+    <div class="row">
+        <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+            <div class="img-con">
+                <img src="@Model.HomepageSecondSectionImagePath/@Model.HomepageSecondSectionImageName" alt="Why Choose To Work With Us?">
+            </div>
+        </div>
+        <div class="col-xl-6 pl-xl-5">
+            <h2 class="title">@Html.Raw(Model.HomepageSecondSectionTitle)</h2>
+            <h4>@Html.Raw(Model.HomepageSecondSectionFirstParagraph)</h4>
+            <p>@Html.Raw(Model.HomepageSecondSectionSecondParagraph)</p>
+            <a href="@Url.Action("Index", "Contact")" class="button btn">book a consult</a> <a href="@Url.Action("Index", "Contact")" class="about-arrow">
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    @Scripts.Render("~/bundles/homeScripts")
+    <script type="application/ld+json">
+        {
+        "@@context": "https://schema.org",
+        "@@type": "ProfessionalService",
+        "name": "Marik",
+        "image": "http://www.bymarik.com/Content/img/logo.png",
+        "@@id": "Marik",
+        "url": "http://www.bymarik.com",
+        "telephone": "+38762779938",
+        "priceRange": "$0-$500",
+        "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "Ulica",
+        "addressLocality": "Mostar",
+        "postalCode": "88000",
+        "addressCountry": "BA"
+        },
+        "geo": {
+        "@@type": "GeoCoordinates",
+        "latitude": 43.3249856,
+        "longitude": 17.82421320000003
+        },
+        "openingHoursSpecification": {
+        "@@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+        },
+        "sameAs": "https://www.instagram.com/marik.agency/"
+        }
+    </script>
+}

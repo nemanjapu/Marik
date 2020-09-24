@@ -1,0 +1,177 @@
+﻿@model Marik.Core.ViewModels.ContactViewModel
+@{
+    ViewBag.Title = "Contact Me";
+}
+@section metatags{
+    <meta name="keywords" content="marketing, social media, email marketing, online marketing, advertising, public relations, Google Ads, Paid search, SEO,  business, development, Web and Graphic Design, UI / UX, Web & App Development, Branding, Photography, Content management, SPSS, market research, consumer behaviour, web design" />
+    <meta name="description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <link href="http://www.bymarik.com/contact" rel="canonical" />
+    <meta property="og:url" content="http://www.bymarik.com/contact" />
+    <meta property="og:title" content="Marik | Marketing and Business Development Contact" />
+    <meta property="og:description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <meta property="og:image:alt" content="Marik | Marketing and Business Development contact" />
+    <meta property="og:type" content="website" />
+}
+
+<div class="container py-5 contact">
+    <div class="row">
+        <div class="col-xl-6">
+            <h2 class="title">@Html.Raw(Model.ContactFirstSectionTitle)</h2>
+            <p>@Html.Raw(Model.ContactFirstSectionFirstParagraph)</p>
+            <h5 class="mb-5 pb-5">@Html.Raw(Model.ContactFirstSectionSignature)</h5>
+            <a class="mail-link" href="mailto:@Model.WebsiteEmailAddress">@Model.WebsiteEmailAddress</a>
+            <div class="social-block pt-4 pb-xl-0 pb-4">
+                @if (!string.IsNullOrEmpty(Model.FacebookLink))
+                {
+                    <a target="_blank" href="@Model.FacebookLink">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(Model.TwitterLink))
+                {
+                    <a target="_blank" href="@Model.TwitterLink">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(Model.LinkedinLink))
+                {
+                    <a target="_blank" href="@Model.LinkedinLink">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(Model.PinterestLink))
+                {
+                    <a target="_blank" href="@Model.PinterestLink">
+                        <i class="fab fa-pinterest-p"></i>
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(Model.InstagramLink))
+                {
+                    <a target="_blank" href="@Model.InstagramLink">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(Model.YoutubeLink))
+                {
+                    <a target="_blank" href="@Model.YoutubeLink">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(Model.GooglePlusLink))
+                {
+                    <a target="_blank" href="@Model.GooglePlusLink">
+                        <i class="fab fa-google-plus-g"></i>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="col-xl-6">
+            @using (Ajax.BeginForm("SubmitForm", "Contact", null, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "MessageCont"
+            }))
+            {
+                <div id="MessageCont">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "first name" })
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "last name" })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "email" })
+                                @Html.ValidationMessageFor(m => m.EmailAddress)
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "phone" })
+                                @Html.ValidationMessageFor(m => m.PhoneNumber)
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Location, new { @class = "form-control", @placeholder = "location" })
+                                @Html.ValidationMessageFor(m => m.Location)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control", @placeholder = "business name" })
+                                @Html.ValidationMessageFor(m => m.BusinessName)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Website, new { @class = "form-control", @placeholder = "website" })
+                                @Html.ValidationMessageFor(m => m.Website)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                @Html.TextAreaFor(m => m.Note, new { @class = "form-control", @placeholder = "how can I help?" })
+                                @Html.ValidationMessageFor(m => m.Note)
+                            </div>
+                            @Html.AntiForgeryToken()
+                            <button class="btn button inverse w-100" type="submit" id="ShowingSubmitBtn">submit</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="application/ld+json">
+        {
+        "@@context": "https://schema.org",
+        "@@type": "ProfessionalService",
+        "name": "Marik",
+        "image": "http://www.bymarik.com/Content/img/logo.png",
+        "@@id": "Marik",
+        "url": "http://www.bymarik.com",
+        "telephone": "+38762779938",
+        "priceRange": "$0-$500",
+        "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "Ulica",
+        "addressLocality": "Mostar",
+        "postalCode": "88000",
+        "addressCountry": "BA"
+        },
+        "geo": {
+        "@@type": "GeoCoordinates",
+        "latitude": 43.3249856,
+        "longitude": 17.82421320000003
+        },
+        "openingHoursSpecification": {
+        "@@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+        },
+        "sameAs": "https://www.instagram.com/marik.agency/"
+        }
+    </script>
+}

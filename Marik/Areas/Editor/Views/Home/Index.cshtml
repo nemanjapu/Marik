@@ -1,0 +1,115 @@
+﻿@model Marik.Core.ViewModels.HomePageViewModel
+@{
+    ViewBag.Title = "Marketing & Business Development";
+    Layout = "~/Areas/Editor/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SaveHomepageContent", "Home", FormMethod.Post, new { area = "Editor", enctype = "multipart/form-data" }))
+{
+    <div class="home-banner">
+        <label for="HomepageMainImageFile" class="button btn image-editor-button-label">Change image</label>
+        @Html.TextBoxFor(m => m.HomepageMainImageFile, new { @class = "image-editor-button", type = "file" })
+        <img id="HomepageMainImageFileImage" src="@Model.HomepageMainImagePath/@Model.HomepageMainImageName" alt="Business table">
+        <div class="banner-overlay">
+            <h1>@Html.TextAreaFor(m => m.HomepageTitle, new { @class = "WebsiteEditorArea" })</h1>
+            <h3>@Html.TextAreaFor(m => m.HomepageSubtitle, new { @class = "WebsiteEditorArea" })</h3>
+            <a href="@Url.Action("Index", "Contact", new { area = "Editor" })" class="btn button inverse">book your free 30 minute stragegy session</a>
+        </div>
+    </div>
+    <section class="about container">
+        <div class="row">
+            <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+                <h2 class="title">@Html.TextAreaFor(m => m.HomepageFirstSectionTitle, new { @class = "WebsiteEditorArea" })</h2>
+                <h4>@Html.TextAreaFor(m => m.HomepageFirstSectionFirstParagraph, new { @class = "WebsiteEditorArea" })</h4>
+                <p>@Html.TextAreaFor(m => m.HomepageFirstSectionSecondParagraph, new { @class = "WebsiteEditorArea" })</p>
+                <a href="@Url.Action("Index", "About", new { area = "Editor" })" class="button btn">more this way</a> <a href="@Url.Action("Index", "About", new { area = "Editor" })" class="about-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="col-xl-6 pl-xl-5">
+                <div class="img-con">
+                    <label for="HomepageFirstSectionImageFile" class="button btn image-editor-button-label">Change image</label>
+                    @Html.TextBoxFor(m => m.HomepageFirstSectionImageFile, new { @class = "image-editor-button", type = "file" })
+                    <img id="HomepageFirstSectionImageFileImage" src="@Model.HomepageFirstSectionImagePath/@Model.HomepageFirstSectionImageName" alt="About Marik">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services container-fluid" id="services">
+        <h2>@Html.TextAreaFor(m => m.HomepageServicesTitle, new { @class = "WebsiteEditorArea" })</h2>
+        <div class="row">
+            <div class="col-xl col-sm-6 service">
+                <label for="HomepageService1ImageFile" class="button btn image-editor-button-label">Change image</label>
+                @Html.TextBoxFor(m => m.HomepageService1ImageFile, new { @class = "image-editor-button", type = "file" })
+                <a href="@Url.Action("BusinessDevelopment", "Services", new { area = "Editor" })"><img id="HomepageService1ImageFileImage" src="http://bymarik.com/@Model.HomepageService1ImagePath/@Model.HomepageService1ImageName" alt=""></a>
+                <a href="@Url.Action("BusinessDevelopment", "Services", new { area = "Editor" })" class="btn button">Business Development</a>
+            </div>
+            <div class="col-xl col-sm-6 service">
+                <label for="HomepageService2ImageFile" class="button btn image-editor-button-label">Change image</label>
+                @Html.TextBoxFor(m => m.HomepageService2ImageFile, new { @class = "image-editor-button", type = "file" })
+                <a href="@Url.Action("Marketing", "Services", new { area = "Editor" })"><img id="HomepageService2ImageFileImage" src="http://bymarik.com/@Model.HomepageService2ImagePath/@Model.HomepageService2ImageName" alt=""></a>
+                <a href="@Url.Action("Marketing", "Services", new { area = "Editor" })" class="btn button">Marketing</a>
+            </div>
+            <div class="col-xl service">
+                <label for="HomepageService3ImageFile" class="button btn image-editor-button-label">Change image</label>
+                @Html.TextBoxFor(m => m.HomepageService3ImageFile, new { @class = "image-editor-button", type = "file" })
+                <a href="@Url.Action("WebDesign", "Services", new { area = "Editor" })"><img id="HomepageService3ImageFileImage" src="http://bymarik.com/@Model.HomepageService3ImagePath/@Model.HomepageService3ImageName" alt=""></a>
+                <a href="@Url.Action("WebDesign", "Services", new { area = "Editor" })" class="btn button">Web design</a>
+            </div>
+            <div class="col-xl col-sm-6 service">
+                <label for="HomepageService4ImageFile" class="button btn image-editor-button-label">Change image</label>
+                @Html.TextBoxFor(m => m.HomepageService4ImageFile, new { @class = "image-editor-button", type = "file" })
+                <a href="@Url.Action("SPSS", "Services", new { area = "Editor" })"><img id="HomepageService4ImageFileImage" src="http://bymarik.com/@Model.HomepageService4ImagePath/@Model.HomepageService4ImageName" alt=""></a>
+                <a href="@Url.Action("SPSS", "Services", new { area = "Editor" })" class="btn button">Statistical Analysis</a>
+            </div>
+            <div class="col-xl col-sm-6 service">
+                <label for="HomepageService5ImageFile" class="button btn image-editor-button-label">Change image</label>
+                @Html.TextBoxFor(m => m.HomepageService5ImageFile, new { @class = "image-editor-button", type = "file" })
+                <a href="@Url.Action("GraphicDesign", "Services", new { area = "Editor" })"><img id="HomepageService5ImageFileImage" src="http://bymarik.com/@Model.HomepageService5ImagePath/@Model.HomepageService5ImageName" alt=""></a>
+                <a href="@Url.Action("GraphicDesign", "Services", new { area = "Editor" })" class="btn button">Graphic Design</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews container-fluid py-5">
+        <div class="container position-relative">
+            <h2 class="title">client love</h2>
+            <p class="description">@Html.TextAreaFor(m => m.HomepageReviewsText, new { @class = "WebsiteEditorArea" })</p>
+            <div class="owl-carousel reviews-carousel">
+                @foreach (var review in Model.Reviews)
+                {
+                    <div class="review">
+                        <p>@review.Text</p>
+                        <h5>@review.ClientName</h5>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="about container">
+        <div class="row">
+            <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+                <div class="img-con">
+                    <label for="HomepageSecondSectionImageFile" class="button btn image-editor-button-label">Change image</label>
+                    @Html.TextBoxFor(m => m.HomepageSecondSectionImageFile, new { @class = "image-editor-button", type = "file" })
+                    <img id="HomepageSecondSectionImageFileImage" src="@Model.HomepageSecondSectionImagePath/@Model.HomepageSecondSectionImageName" alt="Why Choose To Work With Us?">
+                </div>
+            </div>
+            <div class="col-xl-6 pl-xl-5">
+                <h2 class="title">@Html.TextAreaFor(m => m.HomepageSecondSectionTitle, new { @class = "WebsiteEditorArea" })</h2>
+                <h4>@Html.TextAreaFor(m => m.HomepageSecondSectionFirstParagraph, new { @class = "WebsiteEditorArea" })</h4>
+                <p>@Html.TextAreaFor(m => m.HomepageSecondSectionSecondParagraph, new { @class = "WebsiteEditorArea" })</p>
+                <a href="@Url.Action("Index", "Contact", new { area = "Editor" })" class="button btn">book a consult</a> <a href="@Url.Action("Index", "Contact", new { area = "Editor" })" class="about-arrow">
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-block btn-success btn-save-editor"><i class="fa fa-check" aria-hidden="true"></i></button>
+}
+@section scripts{
+    @Scripts.Render("~/bundles/homeScripts")
+}

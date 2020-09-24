@@ -1,0 +1,49 @@
+﻿@model Marik.Core.ViewModels.ProductsPageViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "The Shop";
+}
+@using (Html.BeginForm("SaveProductsContent", "Products", FormMethod.Post, new { area = "Editor", enctype = "multipart/form-data" }))
+{
+    <div class="home-banner">
+        <label for="ProductsMainImageFile" class="button btn image-editor-button-label">Change image</label>
+        @Html.TextBoxFor(m => m.ProductsMainImageFile, new { @class = "image-editor-button", type = "file" })
+        <img id="ProductsMainImageFileImage" src="@Model.ProductsMainImagePath/@Model.ProductsMainImageName" alt="banner">
+        <div class="banner-overlay">
+            <h1>@Html.TextAreaFor(m => m.ProductsTitle, new { @class = "WebsiteEditorArea" })</h1>
+            <h3>@Html.TextAreaFor(m => m.ProductsSubtitle, new { @class = "WebsiteEditorArea" })</h3>
+        </div>
+    </div>
+    <div class="container py-5">
+        <div class="row">
+            @if (Model.ProductList.Count() == 0)
+            {
+                <p class="mb-0">There are currently no products available. Please check back later.</p>
+            }
+            else
+            {
+                foreach (var p in Model.ProductList)
+                {
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="product-con">
+                            <a href="@Url.Action("Product", "Products", new { @id = p.Id, Name = Url.CleanUrl(p.Name) })">
+                                <img src="~/@p.FeaturedImage" alt="@p.Name" />
+                            </a>
+                            <h3>@p.Name</h3>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        @Html.PagedListPager(Model.ProductList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions{
+        MaximumPageNumbersToDisplay = 5,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+        DisplayLinkToNextPage = PagedListDisplayMode.Never,
+        DisplayPageCountAndCurrentLocation = true,
+        PageCountAndCurrentLocationFormat = "Page {0} of {1}"})
+    </div>
+
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-block btn-success btn-save-editor"><i class="fa fa-check" aria-hidden="true"></i></button>
+}

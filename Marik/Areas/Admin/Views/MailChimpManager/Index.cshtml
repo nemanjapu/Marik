@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MailChimp.Net.Models.Member>
+@{
+    ViewBag.Title = "Newsletter subscribers";
+
+    string name = "";
+}
+
+<h2>Newsletter subscribers</h2>
+
+<table id="newsletter-table" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <td>Name</td>
+            <th>Email</th>
+            <th>Email type</th>
+            <th>Location</th>
+            <th>Last changed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var m in Model)
+        {
+        <tr>
+            <td>@m.Status</td>
+            <td>@m.MergeFields["FNAME"] @m.MergeFields["LNAME"]</td>
+            <td>@m.EmailAddress</td>
+            <td>@m.EmailType</td>
+            <td>@m.Location.CountryCode</td>
+            <td>@m.LastChanged</td>
+
+        </tr>
+        }
+    </tbody>
+</table>

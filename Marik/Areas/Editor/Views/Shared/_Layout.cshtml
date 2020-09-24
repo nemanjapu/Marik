@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Marik | @ViewBag.Title</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta property="og:image" content="http://www.bymarik.com/Content/img/logo.png">
+    <meta property="og:image:type" content="image/png">
+    @RenderSection("metatags", required: false)
+    @Styles.Render("~/Content/UserCSS.min.css")
+    @Styles.Render("~/Content/editor/EditorCss")
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="page-loader">
+        <svg>
+            <g>
+                <path d="M 50,100 A 1,1 0 0 1 50,0" />
+            </g>
+            <g>
+                <path d="M 50,75 A 1,1 0 0 0 50,-25" />
+            </g>
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#FF56A1;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#FF9350;stop-opacity:1" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+    <header>
+        <div class="menu-container container-fluid">
+            <nav class="navbar navbar-expand">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "Editor" })">
+                    <img src="~/Content/img/logo.png"
+                         alt="Marik | Marketing & Business Development">
+                </a>
+                <button class="navbar-toggler" type="button" id="open-menu">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars"></i></span>
+                </button>
+                <div class="navbar-expand ml-auto" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <button class="navbar-toggler" type="button" id="close-menu">
+                            <span class="navbar-toggler-icon"><i class="fas fa-times"></i></span>
+                        </button>
+                        <div class="mobile-logo"><a href="@Url.Action("Index", "Home", new { area = "Editor" })"><img src="~/Content/img/logo-white.png" alt="Marik | Marketing & Business Development"></a></div>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Home", new { area = "Editor" })">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "About", new { area = "Editor" })">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#services">Work With Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Products", new { area = "Editor" })">products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Index", "Blogs", new { area = "Editor" })">blog</a>
+                        </li>
+                        <li class="nav-item get-started">
+                            <a class="nav-link" href="@Url.Action("Index", "Contact", new { area = "Editor" })">get started now</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+
+    @Html.Action("Index", "Footer")
+
+    @Scripts.Render("~/bundles/UserScripts")
+    @Scripts.Render("~/bundles/EditorScripts")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

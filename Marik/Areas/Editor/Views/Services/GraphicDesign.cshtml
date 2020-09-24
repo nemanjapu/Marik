@@ -1,0 +1,35 @@
+﻿@model Marik.Core.ViewModels.ServiceViewModel
+@{
+    ViewBag.Title = "Graphic Design";
+}
+
+@using (Html.BeginForm("SaveGraphicDesignContent", "Services", FormMethod.Post, new { area = "Editor", enctype = "multipart/form-data" }))
+{
+    <div class="home-banner">
+        <label for="ServiceGraphicDesignMainImageFile" class="button btn image-editor-button-label">Change image</label>
+        @Html.TextBoxFor(m => m.ServiceGraphicDesignMainImageFile, new { @class = "image-editor-button", type = "file" })
+        <img id="ServiceGraphicDesignMainImageFileImage" src="@Model.ServiceGraphicDesignMainImagePath/@Model.ServiceGraphicDesignMainImageName" alt="banner">
+        <div class="banner-overlay">
+            <h1>@Html.TextAreaFor(m => m.ServiceGraphicDesignTitle, new { @class = "WebsiteEditorArea" })</h1>
+            <h3>@Html.TextAreaFor(m => m.ServiceGraphicDesignSubtitle, new { @class = "WebsiteEditorArea" })</h3>
+        </div>
+    </div>
+    <section class="about container">
+        <div class="row">
+            <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+                <div class="img-con">
+                    <label for="ServiceGraphicDesignFirstSectionImageFile" class="button btn image-editor-button-label">Change image</label>
+                    @Html.TextBoxFor(m => m.ServiceGraphicDesignFirstSectionImageFile, new { @class = "image-editor-button", type = "file" })
+                    <img id="ServiceGraphicDesignFirstSectionImageFileImage" src="@Model.ServiceGraphicDesignFirstSectionImagePath/@Model.ServiceGraphicDesignFirstSectionImageName" alt="ServiceGraphicDesign Marik">
+                </div>
+            </div>
+            <div class="col-xl-6 pl-xl-5">
+                <h2 class="title ml-xl-auto text-xl-right">@Html.TextAreaFor(m => m.ServiceGraphicDesignFirstSectionTitle, new { @class = "WebsiteEditorArea" })</h2>
+                <h4>@Html.TextAreaFor(m => m.ServiceGraphicDesignFirstSectionFirstParagraph, new { @class = "WebsiteEditorArea" })</h4>
+                <p>@Html.TextAreaFor(m => m.ServiceGraphicDesignFirstSectionSecondParagraph, new { @class = "WebsiteEditorArea" })</p>
+            </div>
+        </div>
+    </section>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-block btn-success btn-save-editor"><i class="fa fa-check" aria-hidden="true"></i></button>
+}

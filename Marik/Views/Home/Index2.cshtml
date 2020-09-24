@@ -1,0 +1,180 @@
+﻿@model Marik.Core.Models.Lead
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Marik | Marketing and Business Development</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <meta name="keywords" content="marketing, social media, email marketing, online marketing, advertising, public relations, Google Ads, Paid search, SEO,  business, development, Web and Graphic Design, UI / UX, Web & App Development, Branding, Photography, Content management, SPSS, market research, consumer behaviour, web design" />
+    <!--===============================================================================================-->
+    @*<link rel="icon" type="image/png" href="/Images/images/icons/favicon.ico" />*@
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="SplashPage/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="SplashPage/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="SplashPage/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="SplashPage/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="SplashPage/css/util.css">
+    <link rel="stylesheet" type="text/css" href="SplashPage/css/main.css">
+    <!--===============================================================================================-->
+</head>
+<body>
+    <!--  -->
+    <div class="simpleslide100">
+        <div class="simpleslide100-item bg-img1" style="background-image: url('SplashPage/images/bg01.jpg');"></div>
+        <div class="simpleslide100-item bg-img1" style="background-image: url('SplashPage/images/bg02.jpg');"></div>
+        <div class="simpleslide100-item bg-img1" style="background-image: url('SplashPage/images/bg03.jpg');"></div>
+    </div>
+
+    <div class="size1 overlay1">
+        <!--  -->
+        <div class="w-full flex-w flex-sb-m p-l-65 p-r-80 p-t-22 p-b-185 p-lr-15-sm respon8 top-con">
+            <div class="wrappic1 m-r-30 m-t-10 m-b-10">
+                <a href="#"><img src="Content/img/logo-white.png" alt="Marik | Marketing and Business Development" class="logo"></a>
+            </div>
+
+            @*<div class="flex-w m-t-10 m-b-10 mx-xl-3">
+                    <a href="mailto:vahida@bymarik.com" class="size2 m1-txt1 flex-c-m how-btn1 trans-04">
+                        vahida@bymarik.com
+                    </a>
+                </div>
+
+                <div class="flex-w m-t-10 m-b-10 mx-xl-3">
+                    <a href="tel:+447526644392" class="size2 m1-txt1 flex-c-m how-btn1 trans-04">
+                        +44 7526 644392
+                    </a>
+                </div>
+
+                <div class="flex-w m-t-10 m-b-10 ml-xl-3">
+                    <a href="tel:+38762779938" class="size2 m1-txt1 flex-c-m how-btn1 trans-04">
+                        +387 62 779938
+                    </a>
+                </div>*@
+        </div>
+
+        <!--  -->
+        <div class="flex-sb flex-row-rev where3-parent p-l-58 p-r-46 respon2">
+            <!--  -->
+            <div class="where3 wsize2 respon1">
+                <h3 class="l1-txt2 p-b-30 respon6 respon7">
+                    Coming Soon
+                </h3>
+
+                <p class="m2-txt1 respon6">
+                    Follow us for update now!
+                </p>
+
+                @using (Ajax.BeginForm("SubmitEmail", "Home", null, new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "MessageCont"
+                }))
+                {
+                    <div id="MessageCont" class="contact100-form validate-form p-t-55 w-full">
+                        <div class="wrap-input100 validate-input m-lr-auto-lg" data-validate="Email is required: ex@abc.xyz">
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "s2-txt1 placeholder0 input100 trans-04", placeholder = "Email Address", type = "email", @required = "true" })
+
+                            @Html.AntiForgeryToken()
+                            <button class="flex-c-m ab-t-r size4 s1-txt1 hov1 trans-04" type="submit">
+                                <i class="fa fa-paper-plane fs-15 cl0"></i>
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!--  -->
+            <div class="flex-w flex-col cd100 p-t-34 respon3">
+                <div class="flex-col wsize1 m-b-40 respon4">
+                    <span class="l1-txt1 p-b-30 days">35</span>
+                    <span class="s1-txt1">Days</span>
+                </div>
+
+                <div class="flex-col wsize1 m-b-40 respon4">
+                    <span class="l1-txt1 p-b-30 hours">17</span>
+                    <span class="s1-txt1">Hours</span>
+                </div>
+
+                <div class="flex-col wsize1 m-b-40 respon4">
+                    <span class="l1-txt1 p-b-30 minutes">50</span>
+                    <span class="s1-txt1">Minutes</span>
+                </div>
+
+                <div class="flex-col wsize1 m-b-40 respon4">
+                    <span class="l1-txt1 p-b-30 seconds">39</span>
+                    <span class="s1-txt1">Seconds</span>
+                </div>
+            </div>
+
+            <!--  -->
+            <div class="flex-w flex-col where2 respon5">
+                <a href="https://www.instagram.com/marik.space/" target="_blank" class="size3 flex-c-m how-social trans-04 m-r-3 m-l-3 m-b-5">
+                    <i class="fa fa-instagram"></i>
+                </a>
+
+                @*<a href="#" class="size3 flex-c-m how-social trans-04 m-r-3 m-l-3 m-b-5">
+                        <i class="fa fa-twitter-square"></i>
+                    </a>
+
+                    <a href="#" class="size3 flex-c-m how-social trans-04 m-r-3 m-l-3 m-b-5">
+                        <i class="fa fa-pinterest-square"></i>
+                    </a>*@
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="SplashPage/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="SplashPage/vendor/bootstrap/js/popper.js"></script>
+    <script src="SplashPage/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="SplashPage/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="SplashPage/vendor/countdowntime/moment.min.js"></script>
+    <script src="SplashPage/vendor/countdowntime/moment-timezone.min.js"></script>
+    <script src="SplashPage/vendor/countdowntime/moment-timezone-with-data.min.js"></script>
+    <script src="SplashPage/vendor/countdowntime/countdowntime.js"></script>
+    <script src="Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="Scripts/jquery.validate.min.js"></script>
+    <script>
+        $('.cd100').countdown100({
+            /*Set Endtime here*/
+            /*Endtime must be > current time*/
+            endtimeYear: 0,
+            endtimeMonth: 0,
+            endtimeDate: 35,
+            endtimeHours: 19,
+            endtimeMinutes: 0,
+            endtimeSeconds: 0,
+            timeZone: ""
+            // ex:  timeZone: "America/New_York"
+            //go to " http://momentjs.com/timezone/ " to get timezone
+        });
+    </script>
+    <!--===============================================================================================-->
+    <script src="SplashPage/vendor/tilt/tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="SplashPage/js/main.js"></script>
+
+</body>
+</html>

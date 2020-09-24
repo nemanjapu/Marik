@@ -1,0 +1,117 @@
+﻿@model Marik.Core.ViewModels.AboutViewModel
+@{
+    ViewBag.Title = "About";
+}
+@using (Html.BeginForm("SaveAboutContent", "About", FormMethod.Post, new { area = "Editor", enctype = "multipart/form-data" }))
+{
+    <div class="home-banner">
+        <label for="AboutMainImageFile" class="button btn image-editor-button-label">Change image</label>
+        @Html.TextBoxFor(m => m.AboutMainImageFile, new { @class = "image-editor-button", type = "file" })
+        <img id="AboutMainImageFileImage" src="@Model.AboutMainImagePath/@Model.AboutMainImageName" alt="banner">
+        <div class="banner-overlay">
+            <h1>@Html.TextAreaFor(m => m.AboutTitle, new { @class = "WebsiteEditorArea" })</h1>
+            <h3>@Html.TextAreaFor(m => m.AboutSubtitle, new { @class = "WebsiteEditorArea" })</h3>
+        </div>
+    </div>
+    <section class="about container">
+        <div class="row">
+            <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+                <div class="img-con">
+                    <label for="AboutFirstSectionImageFile" class="button btn image-editor-button-label">Change image</label>
+                    @Html.TextBoxFor(m => m.AboutFirstSectionImageFile, new { @class = "image-editor-button", type = "file" })
+                    <img id="AboutFirstSectionImageFileImage" src="@Model.AboutFirstSectionImagePath/@Model.AboutFirstSectionImageName" alt="About Marik">
+                </div>
+            </div>
+            <div class="col-xl-6 pl-xl-5">
+                <h2 class="title ml-xl-auto text-xl-right">@Html.TextAreaFor(m => m.AboutFirstSectionTitle, new { @class = "WebsiteEditorArea" })</h2>
+                <h4>@Html.TextAreaFor(m => m.AboutFirstSectionFirstParagraph, new { @class = "WebsiteEditorArea" })</h4>
+                <p>@Html.TextAreaFor(m => m.AboutFirstSectionSecondParagraph, new { @class = "WebsiteEditorArea" })</p>
+                <div class="text-xl-right">
+                    <a href="#about" class="button btn">more this way</a>
+                    <a href="#about" class="about-arrow"><i class="fas fa-arrow-down"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services container-fluid" id="about-scroll-to">
+        <h2>@Html.TextAreaFor(m => m.AboutTheFunStuffTitle, new { @class = "WebsiteEditorArea" })</h2>
+        <div class="row">
+            <div class="col-xl service">
+                <label for="AboutMyStoryMainImageFile" class="button btn image-editor-button-label">Change image</label>
+                @Html.TextBoxFor(m => m.AboutMyStoryMainImageFile, new { @class = "image-editor-button", type = "file" })
+                <a href="#my-story"><img id="AboutMyStoryMainImageFileImage" src="@Model.AboutMyStoryMainImagePath/@Model.AboutMyStoryMainImageName" alt="my story"></a>
+                <a href="#my-story" class="btn button">@Model.AboutMyStoryTitle</a>
+            </div>
+            <div class="col-xl-3 service">
+                <label for="AboutMyFavoritesMainImageFile" class="button btn image-editor-button-label">Change image</label>
+                @Html.TextBoxFor(m => m.AboutMyFavoritesMainImageFile, new { @class = "image-editor-button", type = "file" })
+                <a href="#my-favorites"><img id="AboutMyFavoritesMainImageFileImage" src="@Model.AboutMyFavoritesMainImagePath/@Model.AboutMyFavoritesMainImageName" alt="my favorites"></a>
+                <a href="#my-favorites" class="btn button">@Model.AboutMyFavoritesTitle</a>
+            </div>
+            <div class="col-xl service">
+                <label for="AboutFollowAlongMainImageFile" class="button btn image-editor-button-label">Change image</label>
+                @Html.TextBoxFor(m => m.AboutFollowAlongMainImageFile, new { @class = "image-editor-button", type = "file" })
+                <a href="#footer"><img id="AboutFollowAlongMainImageFileImage" src="@Model.AboutFollowAlongMainImagePath/@Model.AboutFollowAlongMainImageName" alt="follow along"></a>
+                <a href="#footer" class="btn button">follow along</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="hidden-con" id="hidden-about">
+        <div id="my-story" class="hidden-tab">
+            <div class="hidden-content p-5">
+                <div class="wrapper-600">
+                    <h2 class="title text-white">
+                        @Html.TextAreaFor(m => m.AboutMyStoryTitle, new { @class = "WebsiteEditorArea" })
+                        <span>@Html.TextAreaFor(m => m.AboutMyStorySubtitle, new { @class = "WebsiteEditorArea" })</span>
+                    </h2>
+                    <p>@Html.TextAreaFor(m => m.AboutMyStoryContent, new { @class = "WebsiteEditorArea" })</p>
+                </div>
+            </div>
+        </div>
+        <div id="my-favorites" class="hidden-tab">
+            <div class="hidden-content p-5">
+                <div class="wrapper-600">
+                    <h2 class="title text-white">
+                        @Html.TextAreaFor(m => m.AboutMyFavoritesTitle, new { @class = "WebsiteEditorArea" })
+                        <span>@Html.TextAreaFor(m => m.AboutMyFavoritesSubtitle, new { @class = "WebsiteEditorArea" })</span>
+                    </h2>
+                    <div class="favorites-table container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6 left-col">
+                                <h5>@Html.TextAreaFor(m => m.AboutMyFavoritesOneOneTitle, new { @class = "WebsiteEditorArea" })</h5>
+                                <p>@Html.TextAreaFor(m => m.AboutMyFavoritesOneOneSubtitle, new { @class = "WebsiteEditorArea" })</p>
+                            </div>
+                            <div class="col-sm-6 right-col">
+                                <h5>@Html.TextAreaFor(m => m.AboutMyFavoritesOneTwoTitle, new { @class = "WebsiteEditorArea" })</h5>
+                                <p>@Html.TextAreaFor(m => m.AboutMyFavoritesOneTwoSubtitle, new { @class = "WebsiteEditorArea" })</p>
+                            </div>
+                            <div class="col-sm-6 left-col">
+                                <h5>@Html.TextAreaFor(m => m.AboutMyFavoritesTwoOneTitle, new { @class = "WebsiteEditorArea" })</h5>
+                                <p>@Html.TextAreaFor(m => m.AboutMyFavoritesTwoOneSubtitle, new { @class = "WebsiteEditorArea" })</p>
+                            </div>
+                            <div class="col-sm-6 right-col">
+                                <h5>@Html.TextAreaFor(m => m.AboutMyFavoritesTwoTwoTitle, new { @class = "WebsiteEditorArea" })</h5>
+                                <p>@Html.TextAreaFor(m => m.AboutMyFavoritesTwoTwoSubtitle, new { @class = "WebsiteEditorArea" })</p>
+                            </div>
+                            <div class="col-sm-6 left-col">
+                                <h5>@Html.TextAreaFor(m => m.AboutMyFavoritesThreeOneTitle, new { @class = "WebsiteEditorArea" })</h5>
+                                <p>@Html.TextAreaFor(m => m.AboutMyFavoritesThreeOneSubtitle, new { @class = "WebsiteEditorArea" })</p>
+                            </div>
+                            <div class="col-sm-6 right-col">
+                                <h5>@Html.TextAreaFor(m => m.AboutMyFavoritesThreeTwoTitle, new { @class = "WebsiteEditorArea" })</h5>
+                                <p>@Html.TextAreaFor(m => m.AboutMyFavoritesThreeTwoSubtitle, new { @class = "WebsiteEditorArea" })</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-block btn-success btn-save-editor"><i class="fa fa-check" aria-hidden="true"></i></button>
+}
+@section scripts{
+    @Scripts.Render("~/bundles/aboutScripts")
+}

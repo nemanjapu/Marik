@@ -1,0 +1,78 @@
+﻿@model Marik.Areas.Admin.ViewModels.GlobalValuesViewModel
+@{
+    ViewBag.Title = "Global Settings";
+}
+
+<h2>Global Settings</h2>
+
+@using (Html.BeginForm("SaveSettings", "GlobalSettings", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label>Phone number:</label>
+                @Html.TextBoxFor(m => m.PhoneNumber1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber1)
+            </div>
+            <div class="form-group">
+                <label>Phone number 2:</label>
+                @Html.TextBoxFor(m => m.PhoneNumber2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber2)
+            </div>
+            <div class="form-group">
+                <label>Address:</label>
+                @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address)
+            </div>
+            <div class="form-group">
+                <label>Email:</label>
+                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmailAddress)
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Facebook link:</label>
+                @Html.TextBoxFor(m => m.FacebookLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FacebookLink)
+            </div>
+            <div class="form-group">
+                <label>Instagram link:</label>
+                @Html.TextBoxFor(m => m.InstagramLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.InstagramLink)
+            </div>
+            <div class="form-group">
+                <label>Twitter link:</label>
+                @Html.TextBoxFor(m => m.TwitterLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TwitterLink)
+            </div>
+            <div class="form-group">
+                <label>Pinterest link:</label>
+                @Html.TextBoxFor(m => m.PinterestLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PinterestLink)
+            </div>
+            <div class="form-group">
+                <label>Google plus link:</label>
+                @Html.TextBoxFor(m => m.GooglePlusLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.GooglePlusLink)
+            </div>
+            <div class="form-group">
+                <label>Linkedin link:</label>
+                @Html.TextBoxFor(m => m.LinkedinLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LinkedinLink)
+            </div>
+            <div class="form-group">
+                <label>Youtube link:</label>
+                @Html.TextBoxFor(m => m.YoutubeLink, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.YoutubeLink)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-block btn-success btn-save-listing"><i class="fa fa-check" aria-hidden="true"></i></button>
+        </div>
+    </div>
+}

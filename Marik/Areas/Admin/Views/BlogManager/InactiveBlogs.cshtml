@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Marik.Core.Models.Blog>
+@{
+    ViewBag.Title = "Inactive Blogs";
+}
+
+<h2>Inactive Blogs</h2>
+
+<table id="blogs-table2" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Caption</th>
+            <th>Blog type</th>
+            <th>Date Published</th>
+            <th>Edit</th>
+            <th>Set Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var blog in Model)
+        {
+        <tr>
+            <td>@blog.Caption</td>
+            <td>@blog.BlogType.Name</td>
+            <td>@blog.Date</td>
+            <td><a class="table-anchor" href="@Url.Action("EditBlog", "BlogManager", new {area = "Admin", id = blog.Id }, null)">Edit</a></td>
+            <td>
+                @using (Html.BeginForm("DeleteBlog", "BlogManager", FormMethod.Post, new { @class = "DeleteListingForm" }))
+                {
+                    var modalId = "deleteListing" + blog.Id;
+                    <input type="hidden" name="Id" value="@blog.Id" />
+                    <a class="table-anchor" id="deleteListingBtn" data-toggle="modal" data-target="#@modalId" href="javascript:void(0);">Delete</a>
+
+                    <div class="modal" tabindex="-1" role="dialog" id="@modalId">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Delete Product</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h4>Are you sure that you want to delete this blog?</h4>
+                                </div>
+                                <div class="modal-footer">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger" id="ConfirmDelete">Delete</button>
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

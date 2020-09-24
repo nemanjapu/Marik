@@ -1,0 +1,36 @@
+﻿@model Marik.Areas.Admin.ViewModels.AddClientReviewViewModel
+@{
+    ViewBag.Title = "New Review";
+}
+
+<h2>Add new review</h2>
+
+@using (Html.BeginForm("SaveNewReview", "ReviewsManager"))
+{
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="Caption">Cient name:</label>
+                    @Html.TextBoxFor(m => m.ClientName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ClientName)
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="inputGroup">
+                    @Html.CheckBoxFor(m => m.isActive)
+                    <label for="isActive">Show on website</label>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="Text">Text:</label>
+                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control blog-content-textarea" })
+                    @Html.ValidationMessageFor(m => m.Text)
+                </div>
+            </div>
+        </div>
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-block btn-success btn-save-listing"><i class="fa fa-check" aria-hidden="true"></i></button>
+    </div>
+}

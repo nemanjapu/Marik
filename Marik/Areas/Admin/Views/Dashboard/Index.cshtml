@@ -1,0 +1,92 @@
+﻿@model Marik.Areas.Admin.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="row">
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <a href="@Url.Action("Index", "ProductManager")">
+            <div class="card-box noradius noborder bg-primary">
+                <i class="fa fa-file-text float-right text-white" aria-hidden="true"></i>
+                <h6 class="text-white text-uppercase m-b-20">Products</h6>
+                <h1 class="m-b-20 text-white counter">@Model.NumberOfProduts</h1>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <a href="@Url.Action("Index", "MailChimpManager")">
+            <div class="card-box noradius noborder bg-success">
+                <i class="fa fa-envelope-o float-right text-white" aria-hidden="true"></i>
+                <h6 class="text-white text-uppercase m-b-20">NL Subscribers</h6>
+                <h1 class="m-b-20 text-white counter">@Model.NumberOfNewsletterSubscribers</h1>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <a href="@Url.Action("Index", "LeadManager")">
+            <div class="card-box noradius noborder bg-warning">
+                <i class="fa fa-users float-right text-white" aria-hidden="true"></i>
+                <h6 class="text-white text-uppercase m-b-20">Contacts</h6>
+                <h1 class="m-b-20 text-white counter">@Model.NumberOfContacts</h1>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-xl-3">
+        <a href="@Url.Action("Index", "BlogManager")">
+            <div class="card-box noradius noborder bg-info">
+                <i class="fa fa-align-justify float-right text-white" aria-hidden="true"></i>
+                <h6 class="text-white text-uppercase m-b-20">Blogs</h6>
+                <h1 class="m-b-20 text-white counter">@Model.NumberOfBlogs</h1>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <h5>Latest contacts</h5>
+        <table class="table table-bordered table-hover datatable-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lead in Model.LatestContacts)
+                {
+                    <tr>
+                        <td>@lead.Date</td>
+                        <td>@lead.FirstName @lead.LastName</td>
+                        <td>@lead.EmailAddress</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <h5>Latest products</h5>
+        <table class="table table-bordered table-hover datatable-table">
+            <thead>
+                <tr>
+                    <th>Downloads</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model.LatestProducts)
+                {
+                    <tr>
+                        <td>@p.NumberOfDownloads</td>
+                        <td>@p.Name</td>
+                        <td>$@p.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

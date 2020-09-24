@@ -1,0 +1,23 @@
+﻿@model Marik.Core.ViewModels.NewsletterViewModel
+
+@using (Ajax.BeginForm("NewsletterSignUp", "Newsletter", null, new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "NewsletterFormCon"
+}))
+{
+    <div class="form-con" id="NewsletterFormCon">
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "first name" })
+        </div>
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", placeholder = "last name" })
+        </div>
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "email", type = "email" })
+        </div>
+        @Html.AntiForgeryToken()
+        <button class="btn button inverse w-100" type="submit">sign up</button>
+    </div>
+}

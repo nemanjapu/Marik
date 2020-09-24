@@ -1,0 +1,59 @@
+﻿@model Marik.Core.ViewModels.BlogsPageViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Blog";
+}
+
+@using (Html.BeginForm("SaveBlogsContent", "Blogs", FormMethod.Post, new { area = "Editor", enctype = "multipart/form-data" }))
+{
+    <div class="home-banner">
+        <label for="BlogsMainImageFile" class="button btn image-editor-button-label">Change image</label>
+        @Html.TextBoxFor(m => m.BlogsMainImageFile, new { @class = "image-editor-button", type = "file" })
+        <img id="BlogsMainImageFileImage" src="@Model.BlogsMainImagePath/@Model.BlogsMainImageName" alt="banner">
+        <div class="banner-overlay">
+            <h1>@Html.TextAreaFor(m => m.BlogsTitle, new { @class = "WebsiteEditorArea" })</h1>
+            <h3>@Html.TextAreaFor(m => m.BlogsSubtitle, new { @class = "WebsiteEditorArea" })</h3>
+        </div>
+    </div>
+    <div class="container py-5">
+        @if (Model.BlogList.Count() == 0)
+        {
+            <p class="mb-0">There are currently no blogs. Please check back later.</p>
+        }
+        else
+        {
+            foreach (var b in Model.BlogList)
+            {
+                <article class="about container blog-post">
+                    <div class="row">
+                        <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+                            <div class="img-con">
+                                <img src="~/@b.Image" alt="@b.Caption">
+                            </div>
+                        </div>
+                        <div class="col-xl-6 pl-xl-5">
+                            <h4 class="mb-0">@b.BlogType</h4>
+                            <h4 class="mb-3">@b.Date.ToString("dd. MMMM yyyy. - HH:MM")</h4>
+                            <h2 class="title mb-4">@b.Caption</h2>
+                            <p class="mb-5 pb-4">@b.Text...</p>
+                            <div class="text-sm-left text-center">
+                                <a href="@Url.Action("Blog","Blogs", new { @id = b.Id, Name = Url.CleanUrl(b.Caption) })" class="button btn link">view post</a>
+                                <a href="#about" class="about-arrow"><i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            }
+            @Html.PagedListPager(Model.BlogList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+            new PagedListRenderOptions{
+            MaximumPageNumbersToDisplay = 5,
+            DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+            DisplayLinkToNextPage = PagedListDisplayMode.Never,
+            DisplayPageCountAndCurrentLocation = true,
+            PageCountAndCurrentLocationFormat = "Page {0} of {1}"})
+        }
+    </div>
+
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-block btn-success btn-save-editor"><i class="fa fa-check" aria-hidden="true"></i></button>
+}

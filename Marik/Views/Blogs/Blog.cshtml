@@ -1,0 +1,89 @@
+﻿@model Marik.Core.ViewModels.BlogDetailsViewModel
+@using System.Text.RegularExpressions
+@{
+    ViewBag.Title = Model.Caption;
+    var imageNameNoSpaces = Regex.Replace(Model.Image, " ", "%20");
+}
+@section metatags{
+    <meta name="keywords" content="@Model.MetaKeywords" />
+    <meta name="description" content="@Model.MetaDescription" />
+    <link href="http://www.bymarik.com/blogs/@Model.Id/@Url.CleanUrl(Model.Caption)" rel="canonical" />
+    <meta property="og:url" content="http://www.bymarik.com/blogs/@Model.Id/@Url.CleanUrl(Model.Caption)" />
+    <meta property="og:title" content="Marik | @Model.Caption" />
+    <meta property="og:description" content="@Model.MetaDescription" />
+    <meta property="og:image:alt" content="Marik | @Model.Caption" />
+    <meta property="og:image" content="http://www.bymarik.com/@imageNameNoSpaces" />
+    <meta property="og:type" content="website" />
+}
+
+<article class="container py-5 blog-details">
+    @*<img src="~/@Model.Image" alt="@Model.Caption" class="d-block mb-3" />*@
+    <div class="wrapper-600">
+        <h2 class="title text-center pb-4 mb-4">@Model.Caption</h2>
+        <h4 class="blog-details-h4">@Model.Date</h4>
+        <h4 class="blog-details-h4 mb-5">@Model.BlogType</h4>
+    </div>
+    <div class="blog-text">
+        @Html.Raw(Model.Text)
+    </div>
+    <p class="share-text pt-5">Share this blog: </p>
+    <div class="social-share-buttons text-center">
+        <a href="http://www.facebook.com/sharer.php?u=http://www.bymarik.com/blogs/@Model.Id/@Url.CleanUrl(Model.Caption)&picture=http://www.bymarik.com/@Model.Image" target="_blank">
+            <i class="fab fa-facebook"></i>
+        </a>
+        <a href="https://twitter.com/share?url=http://www.bymarik.com/blogs/@Model.Id/@Url.CleanUrl(Model.Caption)&amp;text=@Model.Caption" target="_blank">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://plus.google.com/share?url=http://www.bymarik.com/blogs/@Model.Id/@Url.CleanUrl(Model.Caption)" target="_blank">
+            <i class="fab fa-google-plus"></i>
+        </a>
+        <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.bymarik.com/blogs/@Model.Id/@Url.CleanUrl(Model.Caption)" target="_blank">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="http://www.tumblr.com/share/link?url=http://www.bymarik.com/blogs/@Model.Id/@Url.CleanUrl(Model.Caption)&amp;title=@Model.Caption" target="_blank">
+            <i class="fab fa-tumblr"></i>
+        </a>
+    </div>
+</article>
+
+@section scripts{
+    <script type="application/ld+json">
+        {
+        "@@context": "https://schema.org",
+        "@@type": "ProfessionalService",
+        "name": "Marik",
+        "image": "http://www.bymarik.com/Content/img/logo.png",
+        "@@id": "Marik",
+        "url": "http://www.bymarik.com",
+        "telephone": "+38762779938",
+        "priceRange": "$0-$500",
+        "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "Ulica",
+        "addressLocality": "Mostar",
+        "postalCode": "88000",
+        "addressCountry": "BA"
+        },
+        "geo": {
+        "@@type": "GeoCoordinates",
+        "latitude": 43.3249856,
+        "longitude": 17.82421320000003
+        },
+        "openingHoursSpecification": {
+        "@@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+        },
+        "sameAs": "https://www.instagram.com/marik.agency/"
+        }
+    </script>
+}

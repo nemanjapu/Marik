@@ -1,0 +1,207 @@
+﻿@model Marik.Areas.Admin.ViewModels.EditProductViewModel
+@{
+    ViewBag.Title = "Edit product";
+}
+
+<div class="container-fluid">
+    <h2>Edit product</h2>
+
+    @Html.ValidationSummary()
+
+    @using (Html.BeginForm("SaveEditedProduct", "ProductManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Subtitle)
+                    @Html.TextBoxFor(m => m.Subtitle, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Subtitle)
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Price:</label>
+                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number" })
+                    @Html.ValidationMessageFor(m => m.Price)
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <div class="inputGroup">
+                        @Html.CheckBoxFor(m => m.isActive)
+                        <label for="isActive">Show on website</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Product file: @Model.DocumentName</label>
+                    <input class="form-control" type="file" name="document" id="document" accept="application/pdf" />
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Meta keywords:</label>
+                    @Html.TextBoxFor(m => m.MetaKeywords, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MetaKeywords)
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Meta description:</label>
+                    @Html.TextBoxFor(m => m.MetaDescription, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MetaDescription)
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Images:</label>
+                    <input style="padding: 3px;" class="form-control" type="file" name="file" multiple="multiple" accept="image/*" id="images">
+                </div>
+                <div class="container-fluid mb-3">
+                    <div class="row" id="imgs-con">
+
+                    </div>
+                </div>
+                <small class="mb-2 d-block">For images reordering use drag and drop method.</small>
+                <div class="container-fluid imagesPlaceholder">
+                    <div class="row dragableImagesContainer" id="ImagesContainer">
+                        @foreach (var s in Model.EditImagesList)
+                        {
+                            <div class="col-sm-2 sortable-image" id="@s.Id">
+                                <div class="card mb-4">
+                                    <a id="DeleteImageButton" role="button" href="javascript: void(0);" class="btn btn-danger delete-image">
+                                        <i class="fa fa-times"></i>
+                                        <input type="hidden" name="ImageId" class="ImageId" value="@s.Id" />
+                                    </a>
+                                    <img class="card-img-top card-img-bottom draggableHandleImage" src="~/@s.FilePath/@s.FileName" alt="@s.FileName">
+                                    <span class="img-name">@s.FileNameNoExt</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label>Text:</label>
+                    @Html.TextAreaFor(m => m.Text, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Text)
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.Id)
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-block btn-success btn-save-listing"><i class="fa fa-check" aria-hidden="true"></i></button>
+    }
+</div>
+
+@Html.Partial("_LargeFileModal")
+
+@section scripts{
+    <script>
+        $('#ImagesContainer').sortable({
+            delay: 150,
+            opacity: 0.5,
+            handle: ".draggableHandleImage",
+            scroll: true,
+            scrollSensitivity: 100,
+            stop: function (event, ui) {
+                var images = [];
+                $(this).children().each(function (index) {
+                    images.push({
+                        'id': $(this).attr("id"),
+                        'SortOrder': index
+                    });
+                });
+                $.ajax({
+                    url: "/api/ProductImages/SetImagesOrder",
+                    method: "POST",
+                    data: { '': images }
+                }).done(function () {
+                    toastr.success("Images successfully reordered.");
+                }).fail(function () {
+                    toastr.error("Error! Images order not changed.");
+                });
+            }
+        });
+    </script>
+    <script>
+        $('#Text').summernote({
+            height: 350,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['undo', ['undo']],
+                ['redo', ['redo']]
+            ]
+        });
+    </script>
+    <script>
+        $(document).delegate('#DeleteImageButton', 'click', function (e) {
+            e.preventDefault();
+            var idToRemove = $(this).find('.ImageId').val();
+            $.ajax({
+                type: "post",
+                url: "/api/ProductImages/DeleteProductImage/" + idToRemove,
+            }).done(function () {
+                var imgContToRemove = $("#" + idToRemove);
+                imgContToRemove.remove();
+                toastr.success("Image removed.")
+            }).fail(function () {
+                toastr.error("Error! Image not removed.")
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var uploadField = document.getElementById("images");
+
+            uploadField.onchange = function () {
+                if (this.files[0].size > 2000000000) {
+                    $('#LargeFileModal').modal('show')
+                    this.value = "";
+                };
+            };
+
+            var uploadField2 = document.getElementById("document");
+
+            document.getElementById("document").onchange = function () {
+                alert("aa")
+                if (this.files[0].size > 2000000000) {
+                    $('#LargeFileModal').modal('show')
+                    this.value = "";
+                };
+            };
+        });
+    </script>
+    <script>
+        $("#images").on('change', function () {
+            var fileList = this.files;
+            for (var i = 0; i < fileList.length; i++) {
+                var t = window.URL || window.webkitURL;
+                var objectUrl = t.createObjectURL(fileList[i]);
+                $('#imgs-con').append('<div class="col-sm-2"><div class="card mb-4"><img class="card-img-top card-img-bottom" src="' + objectUrl + '" /></div></div>');
+            }
+        });
+    </script>
+}

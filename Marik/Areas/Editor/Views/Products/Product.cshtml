@@ -1,0 +1,45 @@
+﻿@model Marik.Core.ViewModels.ProductDetailsViewModel
+@using System.Text.RegularExpressions
+@{
+    ViewBag.Title = "Product - " + Model.Name;
+    var imageNameNoSpaces = Regex.Replace(Model.Images.FirstOrDefault().FileName, " ", "%20");
+    var imagePathNoSpaces = Regex.Replace(Model.Images.FirstOrDefault().FilePath, " ", "%20");
+    var image = imagePathNoSpaces + "/" + imageNameNoSpaces;
+}
+
+<section class="about container">
+    <div class="row">
+        <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+            <div class="owl-carousel product-img-carousel">
+                @foreach (var img in Model.Images)
+                {
+                    <div class="img-con">
+                        <img src="~/@img.FilePath/@img.FileName" alt="@img.FileNameNoExt">
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-xl-6 pl-xl-5">
+            <h2 class="title text-xl-left">@Model.Name</h2>
+            <h4>@Model.Subtitle</h4>
+            <p>
+                @Html.Raw(Model.Text)
+            </p>
+            <h5 class="price">Price: $@Model.Price</h5>
+            <div class="text-center">
+                @if (Model.Price == 0)
+                {
+                    <a href="@Url.Action("DownloadPDF", "Products", new { productId = Model.Id })" target="_blank" class="button btn inverse py-2 px-5">download</a>
+                }
+                else
+                {
+                    <a href="#about" class="button btn inverse py-2 px-5">download</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    @Scripts.Render("~/bundles/productScripts")
+}

@@ -1,0 +1,87 @@
+﻿@model Marik.Core.ViewModels.ProductsPageViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "The Shop";
+}
+@section metatags{
+    <meta name="keywords" content="marketing, social media, email marketing, online marketing, advertising, public relations, Google Ads, Paid search, SEO,  business, development, Web and Graphic Design, UI / UX, Web & App Development, Branding, Photography, Content management, SPSS, market research, consumer behaviour, web design" />
+    <meta name="description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <link href="http://www.bymarik.com/products" rel="canonical" />
+    <meta property="og:url" content="http://www.bymarik.com/products" />
+    <meta property="og:title" content="Marik | Marketing and Business Development Shop" />
+    <meta property="og:description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <meta property="og:image:alt" content="Marik | Marketing and Business Development shop" />
+    <meta property="og:type" content="website" />
+}
+
+<div class="container py-5">
+    <div class="row">
+        @if (Model.ProductList.Count() == 0)
+        {
+            <p class="mb-0">There are currently no products available. Please check back later.</p>
+        }
+        else
+        {
+            foreach (var p in Model.ProductList)
+            {
+                <div class="col-xl-4 col-sm-6">
+                    <div class="product-con">
+                        <a href="@Url.Action("Product", "Products", new { @id = p.Id, Name = Url.CleanUrl(p.Name) })">
+                            <img src="~/@p.FeaturedImage" alt="@p.Name" />
+                        </a>
+                        <h3>@p.Name</h3>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    @Html.PagedListPager(Model.ProductList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+    new PagedListRenderOptions{
+    MaximumPageNumbersToDisplay = 5,
+    DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+    DisplayLinkToNextPage = PagedListDisplayMode.Never,
+    DisplayPageCountAndCurrentLocation = true,
+    PageCountAndCurrentLocationFormat = "Page {0} of {1}"})
+</div>
+
+@section scripts{
+    <script type="application/ld+json">
+        {
+        "@@context": "https://schema.org",
+        "@@type": "ProfessionalService",
+        "name": "Marik",
+        "image": "http://www.bymarik.com/Content/img/logo.png",
+        "@@id": "Marik",
+        "url": "http://www.bymarik.com",
+        "telephone": "+38762779938",
+        "priceRange": "$0-$500",
+        "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "Ulica",
+        "addressLocality": "Mostar",
+        "postalCode": "88000",
+        "addressCountry": "BA"
+        },
+        "geo": {
+        "@@type": "GeoCoordinates",
+        "latitude": 43.3249856,
+        "longitude": 17.82421320000003
+        },
+        "openingHoursSpecification": {
+        "@@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+        ],
+        "opens": "00:00",
+        "closes": "23:59"
+        },
+        "sameAs": "https://www.instagram.com/marik.agency/"
+        }
+    </script>
+}

@@ -1,0 +1,160 @@
+﻿.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+}
+
+    .page-loader svg {
+        overflow: visible;
+        width: 100px;
+        height: 150px;
+    }
+
+        .page-loader svg g {
+            animation: slide 2s linear infinite;
+        }
+
+            .page-loader svg g:nth-child(2) {
+                animation-delay: 0.5s;
+            }
+
+                .page-loader svg g:nth-child(2) path {
+                    animation-delay: 0.5s;
+                    stroke-dasharray: 0px 158px;
+                    stroke-dashoffset: 1px;
+                }
+
+        .page-loader svg path {
+            stroke: url(#gradient);
+            stroke-width: 20px;
+            stroke-linecap: round;
+            fill: none;
+            stroke-dasharray: 0 157px;
+            stroke-dashoffset: 0;
+            animation: escalade 2s cubic-bezier(0.8, 0, 0.2, 1) infinite;
+        }
+
+@keyframes slide {
+    0% {
+        transform: translateY(-50px);
+    }
+
+    100% {
+        transform: translateY(50px);
+    }
+}
+
+@keyframes escalade {
+    0% {
+        stroke-dasharray: 0 157px;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 156px 157px;
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dasharray: 156px 157px;
+        stroke-dashoffset: -156px;
+    }
+}
+
+
+.note-editor,
+.note-editor .note-editable {
+    border: none;
+    background: transparent;
+    padding: 0;
+    overflow: no-display;
+}
+
+    .note-editor .note-toolbar {
+        padding: 0;
+        background: transparent;
+        border: none;
+        position: absolute;
+        top: -35px;
+        background: #fff;
+        display: none;
+        padding: 2px;
+    }
+
+.note-toolbar > .btn-group {
+    margin-top: 0;
+}
+
+    .note-toolbar > .btn-group.note-insert {
+        margin-right: 0;
+    }
+
+.note-editor::-webkit-scrollbar-track {
+    display: none;
+}
+
+.note-editor::-webkit-scrollbar {
+    display: none;
+}
+
+.note-editor::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+.note-editor .note-editable::-webkit-scrollbar-track {
+    display: none;
+}
+
+.note-editor .note-editable::-webkit-scrollbar {
+    display: none;
+}
+
+.note-editor .note-editable::-webkit-scrollbar-thumb {
+    display: none;
+}
+
+.image-editor-button {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    visibility: hidden;
+    z-index: -1;
+}
+
+.btn.button.image-editor-button-label {
+    position: absolute;
+    z-index: 1000;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+    bottom: auto;
+}
+
+
+.btn-save-editor {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 70px;
+    height: 70px;
+    background: #0fd215;
+    z-index: 1000;
+    font-size: 40px;
+    border-color: #0fd215;
+    line-height: 1;
+}
+
+.note-editor .note-editable {
+    border: 1px dashed #d0cdcd;
+    padding: 5px;
+}

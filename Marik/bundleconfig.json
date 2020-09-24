@@ -1,0 +1,12 @@
+[
+  {
+    "outputFileName": "Content/userCss.css",
+    "inputFiles": [
+      "Content/bootstrap.css",
+      "Content/owl.carousel.css",
+      "Content/owl.theme.default.css",
+      "Content/style.css",
+      "Content/fontawesome-all.css"
+    ]
+  }
+]

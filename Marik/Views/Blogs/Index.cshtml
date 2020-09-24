@@ -1,0 +1,55 @@
+﻿@model Marik.Core.ViewModels.BlogsPageViewModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Blog";
+}
+
+@section metatags{
+    <meta name="keywords" content="marketing, social media, email marketing, online marketing, advertising, public relations, Google Ads, Paid search, SEO,  business, development, Web and Graphic Design, UI / UX, Web & App Development, Branding, Photography, Content management, SPSS, market research, consumer behaviour, web design" />
+    <meta name="description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <link href="http://www.bymarik.com/blogs" rel="canonical" />
+    <meta property="og:url" content="http://www.bymarik.com/blogs" />
+    <meta property="og:title" content="Marik | Marketing and Business Development Blog" />
+    <meta property="og:description" content="Marik gives you the best of integrated marketing and business development. Book a consultation call, and our team will help you make an impact." />
+    <meta property="og:image:alt" content="Marik | Marketing and Business Development" />
+    <meta property="og:type" content="website" />
+}
+
+<div class="container py-5">
+    @if (Model.BlogList.Count() == 0)
+    {
+        <p class="mb-0">There are currently no blogs. Please check back later.</p>
+    }
+    else
+    {
+        foreach (var b in Model.BlogList)
+        {
+            <article class="about container blog-post">
+                <div class="row">
+                    <div class="col-xl-6 pr-xl-5 mb-xl-0 mb-4">
+                        <div class="img-con">
+                            <img src="~/@b.Image" alt="@b.Caption">
+                        </div>
+                    </div>
+                    <div class="col-xl-6 pl-xl-5">
+                        <h4 class="mb-0">@b.BlogType</h4>
+                        <h4 class="mb-3">@b.Date.ToString("dd. MMMM yyyy. - HH:MM")</h4>
+                        <h2 class="title mb-4">@b.Caption</h2>
+                        <p class="mb-5 pb-4">@b.Text...</p>
+                        <div class="text-sm-left text-center">
+                            <a href="@Url.Action("Blog","Blogs", new { @id = b.Id, Name = Url.CleanUrl(b.Caption) })" class="button btn link">view post</a>
+                            <a href="#about" class="about-arrow"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        }
+        @Html.PagedListPager(Model.BlogList, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }),
+        new PagedListRenderOptions{
+        MaximumPageNumbersToDisplay = 5,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+        DisplayLinkToNextPage = PagedListDisplayMode.Never,
+        DisplayPageCountAndCurrentLocation = true,
+        PageCountAndCurrentLocationFormat = "Page {0} of {1}"})
+    }
+</div>

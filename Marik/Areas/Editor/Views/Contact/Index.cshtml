@@ -1,0 +1,130 @@
+﻿@model Marik.Areas.Editor.ViewModels.ContactEditorViewModel
+@{
+    ViewBag.Title = "Contact Me";
+}
+
+@using (Html.BeginForm("SaveContactContent", "Contact", FormMethod.Post, new { area = "Editor", enctype = "multipart/form-data" }))
+{
+    <div class="home-banner">
+        <label for="ContactMainImageFile" class="button btn image-editor-button-label">Change image</label>
+        @Html.TextBoxFor(m => m.ContactMainImageFile, new { @class = "image-editor-button", type = "file" })
+        <img id="ContactMainImageFileImage" src="@Model.ContactMainImagePath/@Model.ContactMainImageName" alt="banner">
+        <div class="banner-overlay">
+            <h1>@Html.TextAreaFor(m => m.ContactTitle, new { @class = "WebsiteEditorArea" })</h1>
+            <h3>@Html.TextAreaFor(m => m.ContactSubtitle, new { @class = "WebsiteEditorArea" })</h3>
+        </div>
+    </div>
+    <div class="container py-5 contact">
+        <div class="row">
+            <div class="col-xl-6">
+                <h2 class="title">@Html.TextAreaFor(m => m.ContactFirstSectionTitle, new { @class = "WebsiteEditorArea" })</h2>
+                <p>@Html.TextAreaFor(m => m.ContactFirstSectionFirstParagraph, new { @class = "WebsiteEditorArea" })</p>
+                <h5 class="mb-5 pb-5">@Html.TextAreaFor(m => m.ContactFirstSectionSignature, new { @class = "WebsiteEditorArea" })</h5>
+                <a class="mail-link" href="mailto:@Model.WebsiteEmailAddress">@Model.WebsiteEmailAddress</a>
+                <div class="social-block pt-4 pb-xl-0 pb-4">
+                    @if (!string.IsNullOrEmpty(Model.FacebookLink))
+                    {
+                        <a target="_blank" href="@Model.FacebookLink">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.TwitterLink))
+                    {
+                        <a target="_blank" href="@Model.TwitterLink">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.LinkedinLink))
+                    {
+                        <a target="_blank" href="@Model.LinkedinLink">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.PinterestLink))
+                    {
+                        <a target="_blank" href="@Model.PinterestLink">
+                            <i class="fab fa-pinterest-p"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.InstagramLink))
+                    {
+                        <a target="_blank" href="@Model.InstagramLink">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.YoutubeLink))
+                    {
+                        <a target="_blank" href="@Model.YoutubeLink">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.GooglePlusLink))
+                    {
+                        <a target="_blank" href="@Model.GooglePlusLink">
+                            <i class="fab fa-google-plus-g"></i>
+                        </a>
+                    }
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div id="MessageCont">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "first name" })
+                                @Html.ValidationMessageFor(m => m.FirstName)
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "last name" })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", @placeholder = "email" })
+                                @Html.ValidationMessageFor(m => m.EmailAddress)
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "phone" })
+                                @Html.ValidationMessageFor(m => m.PhoneNumber)
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Location, new { @class = "form-control", @placeholder = "location" })
+                                @Html.ValidationMessageFor(m => m.Location)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.BusinessName, new { @class = "form-control", @placeholder = "business name" })
+                                @Html.ValidationMessageFor(m => m.BusinessName)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                @Html.TextBoxFor(m => m.Website, new { @class = "form-control", @placeholder = "website" })
+                                @Html.ValidationMessageFor(m => m.Website)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                @Html.TextAreaFor(m => m.Note, new { @class = "form-control", @placeholder = "how can I help?" })
+                                @Html.ValidationMessageFor(m => m.Note)
+                            </div>
+                            <button class="btn button inverse w-100" type="submit" id="ShowingSubmitBtn">send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-block btn-success btn-save-editor"><i class="fa fa-check" aria-hidden="true"></i></button>
+}

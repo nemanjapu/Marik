@@ -1,0 +1,83 @@
+﻿@model Marik.Core.ViewModels.FooterViewModel
+
+<footer class="social" id="footer">
+    <div class="container position-relative">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="container-fluid">
+                    <div class="row" id="instafeed"></div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-5 ml-auto newsletter-container">
+                <a href="mailto:@Model.EmailAddress">@Model.EmailAddress</a>
+                <div class="social-block py-4">
+                    @if (!string.IsNullOrEmpty(Model.FacebookLink))
+                    {
+                        <a target="_blank" href="@Model.FacebookLink">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.TwitterLink))
+                    {
+                        <a target="_blank" href="@Model.TwitterLink">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.LinkedinLink))
+                    {
+                        <a target="_blank" href="@Model.LinkedinLink">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.PinterestLink))
+                    {
+                        <a target="_blank" href="@Model.PinterestLink">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.InstagramLink))
+                    {
+                        <a target="_blank" href="@Model.InstagramLink">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.YoutubeLink))
+                    {
+                        <a target="_blank" href="@Model.YoutubeLink">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.GooglePlusLink))
+                    {
+                        <a target="_blank" href="@Model.GooglePlusLink">
+                            <i class="fab fa-google-plus"></i>
+                        </a>
+                    }
+                </div>
+                <h4>join the list</h4>
+                @Html.Action("NewsletterForm", "Newsletter");
+            </div>
+        </div>
+    </div>
+</footer>
+<footer>
+    <div class="links-con container-fluid py-3">
+        <a href="#top">back to top</a>
+        <a href="@Url.Action("Index", "About")">about</a>
+        <a href="@Url.Action("Index", "Home")#services">services</a>
+        <a href="@Url.Action("Index", "Products")">products</a>
+        <a href="@Url.Action("Index", "Contact")">contact</a>
+        <a href="@Url.Action("Index", "Blogs")">blog</a>
+    </div>
+    <div class="copyright container-fluid py-3">
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="~/Content/img/logo-white.png" alt="Marik | Marketing & Business Development">
+            </div>
+            <div class="col-sm-6 text">
+                <p>&copy; Marik | Marketing & Business Development</p>
+                <p>Powered by <a target="_blank" href="https://www.struix.co/">Struix</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
